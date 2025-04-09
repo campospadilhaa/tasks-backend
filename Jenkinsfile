@@ -68,5 +68,14 @@ pipeline {
                 bat 'docker-compose up -d'
             }
         }
-    }
+         stage('Health Check'){
+            steps{
+                // interrompe o fluxo por 10 segundos para dar tempo do 'Deploy Prod' subir
+                sleep(10)
+                dir('functional-test'){
+                    bat 'mvn verify -Dskip.surefire.tests'
+                }
+            }
+        }
+   }
 }
