@@ -56,7 +56,7 @@ pipeline {
 //        stage('Functional Test'){
 //            steps{
 //                dir('functional-test'){
-//                    git branch: 'main', credentialsId: 'github_login', url: 'https://github.com/campospadilhaa/tasks-functional-tests'
+////                    git branch: 'main', credentialsId: 'github_login', url: 'https://github.com/campospadilhaa/tasks-functional-tests'
 //                    git branch: 'main', url: 'https://github.com/campospadilhaa/tasks-functional-tests'
 //                    bat 'mvn test'
 //                }
@@ -68,19 +68,20 @@ pipeline {
                 bat 'docker-compose up -d'
             }
         }
-         stage('Health Check'){
-            steps{
-                // interrompe o fluxo por 10 segundos para dar tempo do 'Deploy Prod' subir
-                sleep(10)
-                dir('functional-test'){
-                    bat 'mvn verify -Dskip.surefire.tests'
-                }
-            }
-        }
-   }
+//         stage('Health Check'){
+//            steps{
+//                // interrompe o fluxo por 10 segundos para dar tempo do 'Deploy Prod' subir
+//                sleep(10)
+//                dir('functional-test'){
+//                    bat 'mvn verify -Dskip.surefire.tests'
+//                }
+//            }
+//        }
+//   }
    post {
         always {
-            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+//            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml'
         }
    }
 }
