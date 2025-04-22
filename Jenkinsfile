@@ -82,6 +82,7 @@ pipeline {
         always {
 //            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSuccessful: true
         }
         unsuccessful (
             emailext attachLog: true, body: 'Verifique o log em anexo', subject: 'Build ${BUILD_NUMBER} falhou', to: 'campospadilha.a@gmail.com'
