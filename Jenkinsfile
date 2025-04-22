@@ -83,5 +83,11 @@ pipeline {
 //            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml'
         }
+        unsuccessful (
+            emailext attachLog: true, body: 'Verifique o log em anexo', subject: 'Build ${BUILD_NUMBER} falhou', to: 'campospadilha.a@gmail.com'
+        )
+        fixed (
+            emailext attachLog: true, body: 'Verifique o log em anexo', subject: 'Build realizado!', to: 'campospadilha.a@gmail.com'
+        )
    }
 }
